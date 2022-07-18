@@ -17,4 +17,15 @@ class DataFromApi {
       throw Exception('Error');
     }
   }
+
+  Future<ApiFormat> fetchItem(String id) async {
+    var response = await http.get(Uri.parse(
+        'https://62d4154fcd960e45d452f790.mockapi.io/api/article/$id'));
+    if (response.statusCode == 200) {
+      var item = ApiFormat.createObj(jsonDecode(response.body));
+      return item;
+    } else {
+      throw Exception('Error');
+    }
+  }
 }

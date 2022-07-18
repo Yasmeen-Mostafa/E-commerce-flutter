@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data/fetchData.dart';
 import 'package:flutter_application_1/domain/api.dart';
+import 'package:flutter_application_1/screens/details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: _data.length,
                   itemBuilder: (context, index) {
                     print("e $context, $data");
-                    return Card(
+                    return OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Details(_data[index].id),
+                            ));
+                      },
                       child: Row(children: [
                         Container(
                             width: 100,
@@ -59,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(_data[index].title)
+                        Text(_data[index].title, style: TextStyle(fontSize: 18))
                       ]),
                     );
                   });
